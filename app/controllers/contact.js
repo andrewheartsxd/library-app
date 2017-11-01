@@ -6,16 +6,18 @@ export default Controller.extend({
 
   message: '',
 
-  isValid: Ember.computed.match('emailAddress', /^.+@.+\..+$/),
+  emailIsValid: Ember.computed.match('emailAddress', /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
 
-  isDisabled: Ember.computed.not('isValid'),
+  messageIsValid: Ember.computed.gte('message.length', 5),
+
+  isValid: Ember.computed.and('emailIsValid', 'messageIsValid'),
 
   actions: {
 
-    saveInvitation() {
-      alert(`Saving of the following email address is in progress: ${this.get('emailAddress')}`);
-      this.set('responseMessage', `Thank you! We've just saved your email address: ${this.get('emailAddress')}`);
+    submitMessage() {
+      this.set('responseMessage', `Thank you! We've received your message from: ${this.get('emailAddress')}`);
       this.set('emailAddress', '');
+      this.set('message', '');
     }
 
   }
