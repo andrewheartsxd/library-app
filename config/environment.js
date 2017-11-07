@@ -18,6 +18,21 @@ module.exports = function(environment) {
       }
     },
 
+    firebase: {
+      apiKey: process.env.apiKey,
+      authDomain: process.env.authDomain,
+      databaseURL: process.env.databaseURL,
+      projectId: process.env.projectId,
+      storageBucket: process.env.storageBucket,
+      messagingSenderId: process.env.messagingSenderId
+    },
+
+    contentSecurityPolicy: {
+      'script-src': "'self' 'unsafe-eval' apis.google.com",
+      'frame-src': "'self' https://*.firebaseapp.com",
+      'connect-src': "'self' wss://*.firebaseio.com https://*.googleapis.com"
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
