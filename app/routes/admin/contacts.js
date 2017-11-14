@@ -4,6 +4,14 @@ export default Route.extend({
 
   model() {
     return this.store.findAll('contact');
+  },
+
+  actions: {
+
+    deleteContact(contact) {
+      contact.destroyRecord();
+    }
+
   }
 
 });
