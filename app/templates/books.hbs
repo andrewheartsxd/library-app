@@ -1,0 +1,41 @@
+<h1>Books</h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>
+        Author 
+        <br><small class="small not-bold">(Click on name for editing)</small>
+      </th>
+      <th>
+        Title
+        <br><small class="small not-bold">(Click on name for editing)</small>
+      </th>
+      <th>
+        Release Year
+      </th>
+      <th>
+        Library
+        <br><small class="small not-bold">(Click on name for editing)</small>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.books as |book|}}
+      <tr>
+        <td>
+          {{table-edit model=book key=(array "author" "name") columnName="Author" modelList=model.authors default=book.author itemSelected=(route-action 'saveAuthor' book) edit=(route-action 'editBook') saveEdit=(route-action 'saveBook') cancelEdit=(route-action 'cancelBookEdit')}}
+        </td>
+        <td>
+          {{table-edit model=book key="title" columnName="Title" edit=(route-action 'editBook') saveEdit=(route-action 'saveBook') cancelEdit=(route-action 'cancelBookEdit')}}
+        </td>
+        <td>
+          {{book.releaseYear}}
+        </td>
+        <td>
+          {{table-edit model=book key=(array "library" "name") columnName="Library" modelList=model.libraries default=book.library itemSelected=(route-action 'saveLibrary' book) edit=(route-action 'editBook') saveEdit=(route-action 'saveBook') cancelEdit=(route-action 'cancelBookEdit')}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

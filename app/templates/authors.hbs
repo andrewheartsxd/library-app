@@ -1,0 +1,29 @@
+<h1>Authors</h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>
+        Name
+        <br><small class="small not-bold">(Click on name for editing)</small>
+      </th>
+      <th class="vtop">Books</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |author|}}
+      <tr>
+        <td>
+          {{table-edit model=author key="name" columnName="Author" edit=(route-action 'editAuthor') saveEdit=(route-action 'saveAuthor') cancelEdit=(route-action 'cancelAuthorEdit')}}
+        </td>
+        <td>
+          <ul>
+            {{#each author.books as |book|}}
+              <li>{{book.title}}</li>
+            {{/each}}
+          </ul>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

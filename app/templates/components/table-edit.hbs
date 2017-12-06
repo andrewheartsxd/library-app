@@ -1,0 +1,20 @@
+{{#if (get model isEditing)}}
+  <form {{action saveEdit model columnName on='submit'}} class="form-inline">
+    <div class="input-group">
+      {{#if modelList}}
+        {{model-list modelArr=modelList default=default itemSelected=(action itemSelected)}}
+      {{else}}
+        {{input value=(mut (get model (if (is-array key) (join '.' key) key))) class="form-control"}}
+      {{/if}}
+      <div class="input-group-btn">
+        {{#unless modelList}}
+          <button type="submit" class="btn btn-success" disabled={{model.isNotValid}}>Save</button>
+        {{/unless}}
+        <button class="btn btn-danger" {{action cancelEdit model columnName}}>Cancel</button>
+      </div>
+    </div>
+  </form>
+{{else}}
+  <span {{action edit model columnName}}>{{get model (if (is-array key) (join '.' key) key)}}</span>
+{{/if}}
+
